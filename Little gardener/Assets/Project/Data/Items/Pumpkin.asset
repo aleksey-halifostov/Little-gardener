@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45b11344fda73047a837782acda7223, type: 3}
+  m_Name: Pumpkin
+  m_EditorClassIdentifier: 
+  _itemName: Pumpkin
+  _maximumAmount: 10
+  _defaultPrice: 15
+  _isHandle: 0
+  _hasDurability: 0
+  _uiSprite: {fileID: -2662742999451948786, guid: f494ca3372390e14c9754d4a299241c4, type: 3}
+  _growTime: 15
+  _progressSprites:
+  - {fileID: -1771493083694336409, guid: ff650369afdca19498c01c21ce64e658, type: 3}
+  - {fileID: 6725367214400890229, guid: 1f6a90f1a77a6dc48b85cbdfb6aa2616, type: 3}
+  - {fileID: -2662742999451948786, guid: f494ca3372390e14c9754d4a299241c4, type: 3}
