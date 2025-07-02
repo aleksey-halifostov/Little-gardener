@@ -1,6 +1,6 @@
 using UnityEngine;
 using LittleGardener.BuildingsData;
-using LittleGardener.Wallet;
+using LittleGardener.GameWallet;
 using LittleGardener.PlayerControls;
 using LittleGardener.GameManagement;
 
@@ -12,17 +12,15 @@ namespace LittleGardener.Building
         private CellMap _map;
         private GameObject preview;
         private BuildingData _current;
-        private WalletManager _walletManager;
-        private AudioManager _audioManager;
 
+        [SerializeField] private Wallet _walletManager;
+        [SerializeField] private AudioManager _audioManager;
         [SerializeField] private BuildStoreFiller _buildStoreManager;
         [SerializeField] private AudioClip _placingSound;
 
         private void Awake()
         {
             _map = GetComponent<CellMap>();
-            _walletManager = FindFirstObjectByType<WalletManager>();
-            _audioManager = FindFirstObjectByType<AudioManager>();
         }
 
         private void OnEnable()
@@ -37,15 +35,19 @@ namespace LittleGardener.Building
 
         public void InstantiatePreview(BuildingData item)
         {
-            if (preview == null)
-            {
-                preview = Instantiate(item.ObjectPrefab, InputManager.GetCameraCenterWorldPosition(), Quaternion.identity);
+            if (item == null)
+                throw new System.ArgumentNullException(nameof(item));
 
-                if (preview.GetComponent<BuildingBase>() == null && preview.GetComponent<TouchPlacer>() == null)
-                    throw new System.ArgumentException(nameof(item));
+            if (preview != null)
+                return;
 
-                _current = item;
-            }
+            preview = Instantiate(item.ObjectPrefab, InputManager.GetCameraCenterWorldPosition(), Quaternion.identity);
+
+            if (preview.GetComponent<BuildingBase>() == null || preview.GetComponent<TouchPlacer>() == null)
+                throw new System.ArgumentException(nameof(item));
+
+            _current = item;
+
         }
 
         public void InstantiateObject()
@@ -67,9 +69,9 @@ namespace LittleGardener.Building
             _walletManager.SpendMoney(_current.Price);
             _audioManager.PlayEffectSound(_placingSound);
             preview.GetComponent<SpriteRenderer>().color = Color.white;
+            _map.OccupyCell(placer.Cell, preview.GetComponent<BuildingBase>());
             placer.Init();
             Destroy(placer);
-            _map.OccupyCell(placer.Cell, preview.GetComponent<BuildingBase>());
             preview = null;
 
             CancelPreview();

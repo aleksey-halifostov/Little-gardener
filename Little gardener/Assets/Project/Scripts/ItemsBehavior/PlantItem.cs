@@ -11,9 +11,9 @@ namespace LittleGardener.ItemsBehaviour
         public int GrowTime {  get => _data.GrowTime; }
         public bool IsGrown { get; private set; }
 
-        public PlantItem(PlantData data) : base(data)
-        {
-            this._data = data;
+        public PlantItem(PlantData data) : base(data) 
+        { 
+            _data = data;
         }
 
         public Sprite GetFirstProgressSprite()

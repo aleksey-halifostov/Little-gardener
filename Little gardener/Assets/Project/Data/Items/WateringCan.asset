@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e860a90d94f28464fa3e1c9dc8e38f85, type: 3}
+  m_Script: {fileID: 11500000, guid: c2df05048fd4031448c97aad47c7a0a5, type: 3}
   m_Name: WateringCan
   m_EditorClassIdentifier: 
-  _itemName: Watering Can
+  _itemName: WateringCan
   _maximumAmount: 1
   _defaultPrice: 20
   _isHandle: 1
-  _hasDurability: 1
   _uiSprite: {fileID: -7242068299985266083, guid: 84017ba11ca9fa544bc7ec6f4bd545b7, type: 3}
-  _maxDurability: 7
-  _destroySound: {fileID: 8300000, guid: fc7d3dc6b719d4f4088aa8d9c75cd744, type: 3}
+  _itemType: 3
   _toolSound: {fileID: 8300000, guid: 6733528be96461f48aa7782b28263f1e, type: 3}
+  _destroySound: {fileID: 8300000, guid: fc7d3dc6b719d4f4088aa8d9c75cd744, type: 3}
+  _maxDurability: 7
+  _toolType: 1

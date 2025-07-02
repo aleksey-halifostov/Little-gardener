@@ -25,10 +25,13 @@ namespace LittleGardener.Garden
             foreach (Sprite sprite in _connectionData.Sprites)
             {
                 if (sprite == null)
-                    throw new System.ArgumentException(nameof(sprite));
+                    throw new System.NullReferenceException(nameof(sprite));
 
                 _states.Add(i++, sprite);
             }
+
+            if (_map == null)
+                throw new System.NullReferenceException(nameof(_map));
         }
 
         private int GetState(Vector2Int myCell, Dictionary<Vector2Int, BuildingBase> neighbors)
@@ -39,13 +42,12 @@ namespace LittleGardener.Garden
             {
                 if (neighbor.Key.x > myCell.x && neighbor.Key.y == myCell.y)
                     state |= 1;
-                else if (neighbor.Key.x < myCell.x && neighbor.Key.y == myCell.y)
+                if (neighbor.Key.x < myCell.x && neighbor.Key.y == myCell.y)
                     state |= 2;
-                else if (neighbor.Key.y < myCell.y && neighbor.Key.x > myCell.x)
+                if (neighbor.Key.y < myCell.y && neighbor.Key.x > myCell.x)
                     state |= 4;
-                else if (neighbor.Key.y > myCell.y && neighbor.Key.x < myCell.x)
+                if (neighbor.Key.y > myCell.y && neighbor.Key.x < myCell.x)
                     state |= 8;
-                else throw new System.ArgumentException(nameof(neighbors));
             }
 
             return state;
@@ -59,7 +61,6 @@ namespace LittleGardener.Garden
 
             return neighbors;
         }
-
 
         public void Connect()
         {

@@ -11,6 +11,9 @@ namespace LittleGardener.ItemsBehaviour
 
         public void DecreaseDurability()
         {
+            if (CurrentDurability == 0)
+                throw new System.InvalidOperationException("Durability can not be less then 0");
+
             CurrentDurability--;
         }
     }

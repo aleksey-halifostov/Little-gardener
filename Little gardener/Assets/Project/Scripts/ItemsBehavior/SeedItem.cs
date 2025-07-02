@@ -1,6 +1,5 @@
 using LittleGardener.GameManagement;
 using LittleGardener.Garden;
-using LittleGardener.Inventory;
 using LittleGardener.ItemsData;
 
 namespace LittleGardener.ItemsBehaviour
@@ -11,16 +10,18 @@ namespace LittleGardener.ItemsBehaviour
 
         public SeedItem(SeedsData data) : base(data) 
         {
-            this._data = data;
+            _data = data;
         }
 
-        public void Use(GardenBed bed, IItemContainer container, IItemDemonstrationUpdator slot, AudioManager audioManager)
+        public bool Use(IInteractable interactable)
         {
-            if (bed.IsFree)
+            if (interactable is GardenBed bed && bed.IsFree)
             {
                 bed.SetPlant((PlantItem)ItemFactory.CreateNewItem(_data.Plant));
-                slot.RemoveItem(_data, 1);
+                return true;
             }
+
+            return false;
         }
     }
 }

@@ -300,7 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2214b5194e2cfca42b301d205f1983f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 452965502965927216}
+  _itemIcon: {fileID: 0}
+  _durabilitySlider: {fileID: 0}
+  _amountText: {fileID: 0}
 --- !u!225 &5932087663357544260
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -401,6 +403,7 @@ GameObject:
   - component: {fileID: 6727425269722080662}
   - component: {fileID: 5779685906253668097}
   - component: {fileID: 5848468189943202933}
+  - component: {fileID: 4645862640622406385}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -480,9 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac125dcb46e7c04688402dca49873a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 7845405801519447661}
-  _amountText: {fileID: 4575629664010020784}
-  _slider: {fileID: 5158197276826496626}
 --- !u!114 &5848468189943202933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +495,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26f8391a1935c744b472ccf348d9707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _originalCanvas: {fileID: 0}
   _itemIcon: {fileID: 1187317548216779346}
+--- !u!114 &4645862640622406385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974226543591789944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2214b5194e2cfca42b301d205f1983f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemIcon: {fileID: 452965502965927216}
+  _durabilitySlider: {fileID: 5158197276826496626}
+  _amountText: {fileID: 4575629664010020784}
 --- !u!1 &7581127324584605315
 GameObject:
   m_ObjectHideFlags: 0

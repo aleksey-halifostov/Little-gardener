@@ -6,6 +6,10 @@ using LittleGardener.SpriteSorting;
 
 namespace LittleGardener.Animal
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(DefaultYSorter))]
     public class AnimalController : MonoBehaviour
     {
         private AnimalState _state;
@@ -21,6 +25,11 @@ namespace LittleGardener.Animal
         public Vector2 CurrentDirection { get; private set; }
 
         public static event Action<AnimalController> OnAnimalDestroyed;
+        private void OnDisable()
+        {
+            GameSettings.OnVolumeChanged -= SetVolume;
+            OnAnimalDestroyed?.Invoke(this);
+        }
 
         private void Update()
         {
@@ -50,25 +59,29 @@ namespace LittleGardener.Animal
             }
         }
 
-        private void OnDestroy()
-        {
-            GameSettings.OnVolumeChanged -= SetVolume;
-            OnAnimalDestroyed?.Invoke(this);
-        }
-
         private void FlipDirection()
         {
             CurrentDirection *= -1;
+            SetVisualDirection();
+        }
+
+        private void SetVisualDirection()
+        {
+            _spriteRenderer.flipX = CurrentDirection.x < 0 || CurrentDirection.y < 0;
         }
 
         private void ChangeDirection()
         {
             Vector2[] directions = { Vector2.down, Vector2.up,  Vector2.right, Vector2.left};
-            Vector2 newDir = CurrentDirection;
-
-            newDir = directions[UnityEngine.Random.Range(0, directions.Length)];
+            Vector2 newDir = directions[UnityEngine.Random.Range(0, directions.Length)];
 
             CurrentDirection = newDir;
+            SetVisualDirection();
+        }
+
+        private void SetVolume()
+        {
+            _audioSource.volume = AudioManager.EffectSoundVolume * GameSettings.GlobalVolumeCoefficient;
         }
 
         public void Init(Vector2 dir)
@@ -80,6 +93,7 @@ namespace LittleGardener.Animal
 
             CurrentDirection = dir;
             SetVolume();
+            SetVisualDirection();
 
             _state = new AnimalRunState(this, transform);
             GameSettings.OnVolumeChanged += SetVolume;
@@ -87,7 +101,9 @@ namespace LittleGardener.Animal
 
         public void SetState(AnimalState state)
         {
+            _state?.Exit();
             _state = state;
+            _state?.Enter();
         }
 
         public void SetAnimatorTrigger(int hash)
@@ -95,19 +111,9 @@ namespace LittleGardener.Animal
             _animator.SetTrigger(hash);
         }
 
-        public void SetVisualDirection()
-        {
-            _spriteRenderer.flipX = (CurrentDirection.x < 0 || CurrentDirection.y < 0) ? true : false;
-        }
-
         public void PlayEatAudio()
         {
             _audioSource.PlayOneShot(_eatClip);
-        }
-
-        public void SetVolume()
-        {
-            _audioSource.volume = AudioManager.EffectSoundVolume * GameSettings.GlobalVolumeCoeficient;
         }
 
         public void Sort()

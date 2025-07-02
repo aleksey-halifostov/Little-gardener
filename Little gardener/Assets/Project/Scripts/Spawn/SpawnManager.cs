@@ -8,8 +8,8 @@ namespace LittleGardener.Spawn
 {
     public class SpawnManager : MonoBehaviour
     {
-        private List<AnimalController> _animalControllers = new List<AnimalController>();
         private const int _animalMaxCount = 5;
+        private List<AnimalController> _animalControllers = new List<AnimalController>();
         
         [SerializeField] private GameObject[] _animalPrefabs;
 

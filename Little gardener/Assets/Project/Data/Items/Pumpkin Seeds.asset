@@ -16,6 +16,6 @@ MonoBehaviour:
   _maximumAmount: 20
   _defaultPrice: 10
   _isHandle: 1
-  _hasDurability: 0
   _uiSprite: {fileID: -356573385, guid: 93cfbed30be04344ea45515514817590, type: 3}
+  _itemType: 1
   _plant: {fileID: 11400000, guid: 3dc54114677d79f4d9fbef2c71a1267c, type: 2}

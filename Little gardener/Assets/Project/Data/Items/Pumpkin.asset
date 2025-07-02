@@ -16,8 +16,8 @@ MonoBehaviour:
   _maximumAmount: 10
   _defaultPrice: 15
   _isHandle: 0
-  _hasDurability: 0
   _uiSprite: {fileID: -2662742999451948786, guid: f494ca3372390e14c9754d4a299241c4, type: 3}
+  _itemType: 2
   _growTime: 15
   _progressSprites:
   - {fileID: -1771493083694336409, guid: ff650369afdca19498c01c21ce64e658, type: 3}

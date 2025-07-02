@@ -13,12 +13,13 @@ namespace LittleGardener.GameManagement
 
         private void OnEnable()
         {
-            GameSettings.OnVolumeChanged += SetVolume;
+            GameSettings.OnVolumeChanged += UpdateVolume;
+            UpdateVolume();
         }
 
         private void OnDisable()
         {
-            GameSettings.OnVolumeChanged -= SetVolume;
+            GameSettings.OnVolumeChanged -= UpdateVolume;
         }
 
         public void PlayEffectSound(AudioClip clip)
@@ -31,11 +32,11 @@ namespace LittleGardener.GameManagement
             _uiSoundSource.PlayOneShot(clip);
         }
 
-        public void SetVolume()
+        public void UpdateVolume()
         {
-            _bgSoundSource.volume = BackgroundSoundVolume * GameSettings.GlobalVolumeCoeficient;
-            _uiSoundSource.volume = EffectSoundVolume * GameSettings.GlobalVolumeCoeficient;
-            _effectSoundSource.volume = EffectSoundVolume * GameSettings.GlobalVolumeCoeficient;
+            _bgSoundSource.volume = BackgroundSoundVolume * GameSettings.GlobalVolumeCoefficient;
+            _uiSoundSource.volume = EffectSoundVolume * GameSettings.GlobalVolumeCoefficient;
+            _effectSoundSource.volume = EffectSoundVolume * GameSettings.GlobalVolumeCoefficient;
         }
     }
 }

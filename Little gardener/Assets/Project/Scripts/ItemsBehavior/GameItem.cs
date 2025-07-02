@@ -4,11 +4,11 @@ namespace LittleGardener.ItemsBehaviour
 {
     public class GameItem
     {
-        public ItemData Data;
+        public ItemData Data { get; }
 
         public GameItem(ItemData data)
         {
-            this.Data = data;
+            Data = data;
         }
     }
 }

@@ -58,9 +58,7 @@ namespace LittleGardener.Building
             _sortable.Sort();
 
             if (TryGetComponent<IConnectable>(out IConnectable connectable))
-            {
                 connectable.Connect();
-            }
         }
     }
 }

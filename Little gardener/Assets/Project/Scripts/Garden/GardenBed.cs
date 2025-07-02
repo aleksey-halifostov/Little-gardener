@@ -7,7 +7,7 @@ using LittleGardener.Building;
 namespace LittleGardener.Garden
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public class GardenBed : BuildingBase, ISortable
+    public class GardenBed : BuildingBase, ISortable, IInteractable
     {
         private bool _isWatered = false;
         private PlantItem _currentPlant;
@@ -16,8 +16,8 @@ namespace LittleGardener.Garden
         private SpriteRenderer _spriteRenderer;
 
         [SerializeField] private Plant _plant;
-        [SerializeField] Sprite _wetBedSprite;
-        [SerializeField] Sprite _dryBedSprite;
+        [SerializeField] private Sprite _wetBedSprite;
+        [SerializeField] private Sprite _dryBedSprite;
 
         public bool IsFree => _currentPlant == null;
 
@@ -28,14 +28,16 @@ namespace LittleGardener.Garden
 
         private IEnumerator GrowPlant(PlantItem currentPlantItem)
         {
-            WaitForSeconds wait = new WaitForSeconds(_currentPlant.GrowTime);
+            if (currentPlantItem == null)
+                throw new System.ArgumentNullException(nameof(currentPlantItem));
 
+            WaitForSeconds wait = new WaitForSeconds(_currentPlant.GrowTime);
             _plant.SetSprite(_currentPlant.GetFirstProgressSprite());
 
             while (!_currentPlant.IsGrown)
             {
-                yield return wait;
                 yield return new WaitUntil(() => _isWatered);
+                yield return wait;
 
                 _plant.SetSprite(_currentPlant.Grow());
             }
@@ -51,11 +53,15 @@ namespace LittleGardener.Garden
 
         public void SetPlant(PlantItem newPlant)
         {
-            if (IsFree)
-            {
-                _currentPlant = newPlant;
-                _growingCoroutine = StartCoroutine(GrowPlant(_currentPlant));
-            }
+            if (newPlant == null)
+                throw new System.ArgumentNullException(nameof(newPlant));
+
+            if (!IsFree)
+                return;
+                
+            _currentPlant = newPlant;
+            _growingCoroutine = StartCoroutine(GrowPlant(_currentPlant));
+            
         }
 
         public void WaterBed()
