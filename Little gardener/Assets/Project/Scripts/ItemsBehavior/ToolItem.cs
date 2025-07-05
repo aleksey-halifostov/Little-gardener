@@ -18,6 +18,8 @@ namespace LittleGardener.ItemsBehaviour
             audioManager.PlayEffectSound(_toolData.ToolSound);
         }
 
+        protected bool IsReadyToDestroy() { return CurrentDurability == 0; }
+
         public ToolItem(ToolData data) : base(data)
         {
             _durabilityController = new ItemDurabilityController(data.MaxDurability);

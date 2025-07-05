@@ -8,7 +8,35 @@ namespace LittleGardener.PlayerControls
     {
         private static List<RaycastResult> _raycastResults = new List<RaycastResult>();
 
-        public static bool IsTouchOverUI(Vector2 pos)
+        private static bool TryGetClickPosition(out Vector2 position)
+        {
+            position = default;
+
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
+            if (Input.GetMouseButtonDown(0) && !IsTapOverUI(Input.mousePosition))
+            {
+                position = Input.mousePosition;
+                return true;
+            }
+#endif
+
+#if UNITY_ANDROID || UNITY_WEBGL
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began && !IsTapOverUI(touch.position))
+                {
+                    position = Input.mousePosition;
+                    return true;
+                }
+            }
+#endif
+
+            return false;
+        }
+
+        private static bool IsTapOverUI(Vector2 pos)
         {
             PointerEventData eventData = new PointerEventData(EventSystem.current);
             eventData.position = pos;
@@ -18,46 +46,55 @@ namespace LittleGardener.PlayerControls
             return _raycastResults.Count > 0;
         }
 
-        public static bool TryGetTouchCollider(out Collider2D collider)
+        public static bool TryGetClickCollider(out Collider2D collider)
         {
             collider = null;
 
-            if (!TryGetTouch(out Touch touch))
+            if (!TryGetClickPosition(out Vector2 position))
                 return false;
 
-            if (touch.phase != TouchPhase.Began)
-                return false;
-
-            Vector2 _rayStartPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            Vector2 _rayStartPosition = Camera.main.ScreenToWorldPoint(position);
             RaycastHit2D hit = Physics2D.Raycast(_rayStartPosition, Vector2.zero);
             collider = hit.collider;
             return collider != null;
         }
 
-        public static bool TryGetTouchWorldPosition(out Vector2 position)
+        public static bool TryGetTapWorldPosition(out Vector2 position)
         {
             position = default;
 
-            if (!TryGetTouch(out Touch touch))
+            if (!TryGetTapPosition(out Vector2 tapPosition))
                 return false;
 
-            position = Camera.main.ScreenToWorldPoint(touch.position);
+            position = Camera.main.ScreenToWorldPoint(tapPosition);
             return true;
         }
 
-        public static bool TryGetTouch(out Touch touch)
+        public static bool TryGetTapPosition(out Vector2 position)
         {
+            position = default;
+
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
+            if (Input.GetMouseButton(0) && !IsTapOverUI(Input.mousePosition))
+            {
+                position = Input.mousePosition;
+                return true;
+            }
+#endif
+
+#if UNITY_ANDROID || UNITY_WEBGL
             if (Input.touchCount > 0)
             {
-                touch = Input.GetTouch(0);
+                Touch touch = Input.GetTouch(0);
 
-                if (!IsTouchOverUI(touch.position))
+                if (touch.phase == TouchPhase.Moved && !IsTapOverUI(touch.position))
                 {
+                    position = Input.mousePosition;
                     return true;
                 }
             }
+#endif
 
-            touch = default;
             return false;
         }
 

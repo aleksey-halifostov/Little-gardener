@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac125dcb46e7c04688402dca49873a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _view: {fileID: 4645862640622406385}
 --- !u!114 &5848468189943202933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26f8391a1935c744b472ccf348d9707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _originalCanvas: {fileID: 0}
   _itemIcon: {fileID: 1187317548216779346}
 --- !u!114 &4645862640622406385
 MonoBehaviour:

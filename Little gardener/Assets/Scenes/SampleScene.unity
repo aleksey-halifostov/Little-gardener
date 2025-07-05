@@ -5254,8 +5254,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: -2040048631, guid: e0ebb94356be7e840af79798dcc90f95, type: 3}
-    m_PressedSprite: {fileID: 634046765, guid: e0ebb94356be7e840af79798dcc90f95, type: 3}
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: -2040048631, guid: e0ebb94356be7e840af79798dcc90f95, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -5625,10 +5625,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5848468189943202933, guid: 3a602c65a993bca4b9d82e452cf16c77, type: 3}
-      propertyPath: _originalCanvas
-      value: 
-      objectReference: {fileID: 1320792285}
     - target: {fileID: 6974226543591789944, guid: 3a602c65a993bca4b9d82e452cf16c77, type: 3}
       propertyPath: m_Name
       value: InventorySlot
@@ -7857,7 +7853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 0}
+  m_AnchoredPosition: {x: 190, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1865080072
@@ -8560,10 +8556,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 599256048}
     m_Modifications:
-    - target: {fileID: 2943795344113596746, guid: add8b41a0c546be499556ce3f9f46c50, type: 3}
-      propertyPath: _playerController
-      value: 
-      objectReference: {fileID: 519420036}
     - target: {fileID: 4814701949138514752, guid: add8b41a0c546be499556ce3f9f46c50, type: 3}
       propertyPath: m_Name
       value: QuickSlot

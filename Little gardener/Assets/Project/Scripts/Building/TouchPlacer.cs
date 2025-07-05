@@ -29,7 +29,7 @@ namespace LittleGardener.Building
 
         private void Update()
         {
-            if (InputManager.TryGetTouchWorldPosition(out Vector2 pos))
+            if (InputManager.TryGetTapWorldPosition(out Vector2 pos))
                 TouchFollow(pos);
         }
 

@@ -6,6 +6,9 @@ namespace LittleGardener.ItemsBehaviour
 
         public ItemDurabilityController(int currentDurability)
         {
+            if (currentDurability <= 0)
+                throw new System.ArgumentOutOfRangeException(nameof(currentDurability));
+
             CurrentDurability = currentDurability;
         }
 

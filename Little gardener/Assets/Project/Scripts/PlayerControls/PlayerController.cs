@@ -10,7 +10,7 @@ namespace LittleGardener.PlayerControls
 
         private void Update()
         {
-            if (_handSlot != null && InputManager.TryGetTouchCollider(out Collider2D collider))
+            if (_handSlot != null && InputManager.TryGetClickCollider(out Collider2D collider))
             {
                 TryToInteract(collider);
             }

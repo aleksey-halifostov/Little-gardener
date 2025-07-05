@@ -27,7 +27,7 @@ namespace LittleGardener.ItemsBehaviour
                 UpdateDurability(_audioManager);
             }
 
-            return CurrentDurability <= 0;
+            return IsReadyToDestroy();
         }
     }
 }

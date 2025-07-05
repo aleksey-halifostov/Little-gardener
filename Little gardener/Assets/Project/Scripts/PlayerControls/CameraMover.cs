@@ -5,8 +5,9 @@ namespace LittleGardener.PlayerControls
 {
     public class CameraMover : MonoBehaviour
     {
-        private Vector2 _previousTouchPosition = Vector2.zero;
+        private Vector2 _previousTapPosition;
         private Camera _camera;
+        private bool _isDragging = false;
         private float _cameraZ = -10f;
 
         private void Awake()
@@ -33,22 +34,21 @@ namespace LittleGardener.PlayerControls
         {
             moveVector = default;
 
-            if (!InputManager.TryGetTouch(out Touch touch))
-                return false;
-
-            switch (touch.phase)
+            if (!InputManager.TryGetTapPosition(out Vector2 position))
             {
-                case TouchPhase.Began:
-                    _previousTouchPosition = touch.position;
-                    return false;
-                case TouchPhase.Moved:
-                    moveVector = _camera.ScreenToWorldPoint(_previousTouchPosition) - _camera.ScreenToWorldPoint(touch.position);
-                    _previousTouchPosition = touch.position;
-                    return true;
-                default:
-
-                    return false;
+                _isDragging = false;
+                return false;
             }
+            else if (_isDragging)
+            {
+                moveVector = _camera.ScreenToWorldPoint(_previousTapPosition) - _camera.ScreenToWorldPoint(position);
+                _previousTapPosition = position;
+                return true;
+            }
+
+            _previousTapPosition = position;
+            _isDragging = true;
+            return false;
         }
     }
 }

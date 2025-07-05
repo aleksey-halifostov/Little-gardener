@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac125dcb46e7c04688402dca49873a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _view: {fileID: 4989377004803893392}
 --- !u!114 &2943795344113596746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97194c048fe44ba449b8043bc8317bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 0}
 --- !u!114 &7278353114964249674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,7 +531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b793893c2ccf74994927dadaf49271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _originalCanvas: {fileID: 0}
   _itemIcon: {fileID: 8978171288949548360}
 --- !u!114 &4989377004803893392
 MonoBehaviour:

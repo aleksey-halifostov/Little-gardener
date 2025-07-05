@@ -40,7 +40,7 @@ namespace LittleGardener.ItemsBehaviour
                     _container.ShowMessage();
             }
 
-            return CurrentDurability > 0;
+            return IsReadyToDestroy();
         }
     }
 }

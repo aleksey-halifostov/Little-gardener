@@ -12,7 +12,7 @@ namespace LittleGardener.GameWallet
         {
             _view = GetComponent<WalletView>();
 
-            AddMoney(2000);
+            AddMoney(200);
         }
         
         public bool IsMoneyEnough(int needMoney)

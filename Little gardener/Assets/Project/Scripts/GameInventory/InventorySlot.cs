@@ -8,14 +8,10 @@ namespace LittleGardener.GameInventory
     {
         private GameItem _item;
         private int _amount;
-        private InventorySlotView _view;
+
+        [SerializeField] private InventorySlotView _view;
 
         public bool IsFree => _item == null;
-
-        private void Awake()
-        {
-            _view = GetComponent<InventorySlotView>();
-        }
 
         private void OccupySlot(GameItem item, int amount)
         {
